@@ -23,5 +23,6 @@ const formatMoney = (money) => {
     return integerFormat + "." + decimalPart;
 };
 
-console.log(formatMoney(12000));
-console.log(formatMoney(12000.34));
+console.log(formatMoney(1000000));
+console.log(formatMoney(123456));
+console.log(formatMoney(12000.02))
