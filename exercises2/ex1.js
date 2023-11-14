@@ -4,10 +4,6 @@
  * @returns {number}
  */
 const _product = (from, to) => {
-    if (from > to) {
-        return 1;
-    }
-
     let product = 1;
     for (let i = from; i <= to; i++) {
         product *= i;
