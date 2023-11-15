@@ -1,20 +1,13 @@
 /**
- * @param {number} min
- * @param {number} max
- * @returns {number}
- */
-const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-/**
  * @param {any[]} arr
  * @returns {any}
  */
 const randomElement = (arr) => {
-    const randomIndex = random(0, arr.length - 1);
+    const randomIndex = Math.trunc(Math.random() * arr.length);
     return arr[randomIndex];
 };
 
-const arr = ["apple", "banana", "organe"];
+const arr = ["apple", "banana", "ograne"];
 for (let i = 0; i < 10; i++) {
     console.log(randomElement(arr));
 }

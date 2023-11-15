@@ -1,7 +1,3 @@
-/**
- * @param {string} file
- * @returns {string}
- */
 const getExtensionFile = (file) => {
     const [, type] = file.split(".");
     return type;

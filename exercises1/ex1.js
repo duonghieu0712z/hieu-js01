@@ -1,13 +1,8 @@
-/**
- * @param {number} money
- * @returns {string}
- */
 const formatMoney = (money) => {
     const moneyStr = money.toString();
-
     const [integerPart, decimalPart] = moneyStr.split(".");
-
     const integerLen = integerPart.length;
+
     let integerFormat = "";
     for (let i = integerLen - 1; i >= 0; i--) {
         integerFormat = integerPart[i] + integerFormat;
@@ -16,13 +11,9 @@ const formatMoney = (money) => {
         }
     }
 
-    if (!decimalPart) {
-        return integerFormat;
-    }
-
-    return integerFormat + "." + decimalPart;
+    return !!decimalPart ? integerFormat + "." + decimalPart : integerFormat;
 };
 
 console.log(formatMoney(1000000));
 console.log(formatMoney(123456));
-console.log(formatMoney(12000.02))
+console.log(formatMoney(12000.02));
