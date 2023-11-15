@@ -8,5 +8,11 @@ const _product = (from, to) => {
 
 const combination = (k, n) => _product(n - k + 1, n) / _product(1, k);
 
-console.log(combination(4, 9));
-console.log(combination(2, 6));
+const arr = [
+    [4, 9],
+    [2, 6],
+];
+arr.forEach((value) => {
+    const [k, n] = value;
+    console.log(`C(${k}, ${n}) =`, combination(k, n));
+});

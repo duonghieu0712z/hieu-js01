@@ -12,4 +12,5 @@ const countWord = (word) => {
     return count;
 };
 
-console.log(countWord("oneTwoThree"));
+const arr = ["", "oneTwoThree", "hello", "HTML"];
+arr.forEach((value) => console.log(value, "=>", countWord(value)));

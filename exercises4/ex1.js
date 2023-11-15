@@ -1,7 +1,3 @@
-/**
- * @param {number} number
- * @returns {string}
- */
 const toRoman = (number) => {
     const romanNumbers = {
         M: 1000,
@@ -29,9 +25,5 @@ const toRoman = (number) => {
     return romanStr;
 };
 
-console.log(toRoman(39));
-console.log(toRoman(246));
-console.log(toRoman(789));
-console.log(toRoman(2421));
-console.log(toRoman(3888));
-console.log(toRoman(3999));
+const arr = [1, 2, 9, 10, 11, 22, 39, 246, 789, 2421, 3888, 3999];
+arr.forEach((value) => console.log(value, toRoman(value)));

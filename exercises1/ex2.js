@@ -1,4 +1,4 @@
-const formatMoney = (money) => {
+const formatShortenMoney = (money) => {
     const shortenChars = ["", "K", "M", "B"];
 
     let integerPart, decimalPart, shortenChar;
@@ -16,7 +16,5 @@ const formatMoney = (money) => {
         : integerPart + shortenChar;
 };
 
-console.log(formatMoney(234));
-console.log(formatMoney(1000));
-console.log(formatMoney(1123400000));
-console.log(formatMoney(1342222));
+const arr = [234, 2, 1000, 1_123_400_000, 1_342_222];
+arr.forEach((value) => console.log(value, "<=>", formatShortenMoney(value)));

@@ -117,11 +117,8 @@ const readNumber = (number) => {
     return numStr;
 };
 
-console.log(readNumber(1000));
-console.log(readNumber(1003));
-console.log(readNumber(1041));
-console.log(readNumber(1205));
-console.log(readNumber(1234));
-console.log(readNumber(123456));
-console.log(readNumber(120000));
-console.log(readNumber(1_102_006_050_345_477));
+const arr = [
+    0, 1, 10, 11, 14, 15, 20, 31, 52, 65, 100, 101, 105, 214, 344, 1001, 1202,
+    2000, 3456, 10000, 23456, 123456,
+];
+arr.forEach((value) => console.log(value, readNumber(value)));

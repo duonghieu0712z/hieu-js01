@@ -1,7 +1,4 @@
-const getExtensionFile = (file) => {
-    const [, type] = file.split(".");
-    return type;
-};
+const getExtensionFile = (file) => file.split(".").pop();
 
-console.log(getExtensionFile("image.png"));
-console.log(getExtensionFile("sound.mp3"));
+const arr = ["image.png", "sound.mp3", "helloworld.txt", "thisisgame.tar.gz"];
+arr.forEach((value) => console.log(value, "=>", getExtensionFile(value)));
