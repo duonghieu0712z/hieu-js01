@@ -1,8 +1,3 @@
-/**
- * @param {number} from
- * @param {number} to
- * @returns {number}
- */
 const _product = (from, to) => {
     let product = 1;
     for (let i = from; i <= to; i++) {
@@ -11,11 +6,6 @@ const _product = (from, to) => {
     return product;
 };
 
-/**
- * @param {number} k
- * @param {number} n
- * @returns {number}
- */
 const combination = (k, n) => _product(n - k + 1, n) / _product(1, k);
 
 console.log(combination(4, 9));

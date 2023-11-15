@@ -1,7 +1,3 @@
-/**
- * @param {any[]} arr
- * @returns {any}
- */
 const randomElement = (arr) => {
     const randomIndex = Math.trunc(Math.random() * arr.length);
     return arr[randomIndex];
