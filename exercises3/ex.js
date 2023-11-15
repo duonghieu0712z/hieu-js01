@@ -1,10 +1,3 @@
-/**
- * @param {number[][]} garden
- * @param {number} step
- * @param {number[]} path
- * @param {number[][]} paths
- * @returns {number[][]}
- */
 const _findWay = (garden, step, path, paths) => {
     for (let i = 0; i < 3; i++) {
         if (garden[step][i] === 0) {
@@ -19,20 +12,17 @@ const _findWay = (garden, step, path, paths) => {
     }
 };
 
-/**
- * @param {number[][]} garden
- * @returns {number[][]}
- */
 const findWay = (garden) => {
     const paths = [];
     _findWay(garden, 0, [], paths);
     return paths;
 };
 
-findWay([
+const garden = [
     [0, 1, 1],
     [0, 0, 1],
     [0, 1, 1],
     [0, 0, 0],
     [0, 0, 1],
-]).forEach((value) => console.log(value));
+];
+findWay(garden).forEach((value) => console.log(value));
