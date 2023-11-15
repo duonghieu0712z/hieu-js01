@@ -13,10 +13,6 @@ const numbers = [
 
 const ones = ["", "mốt", "hai", "ba", "tư", "lăm", "sáu", "bảy", "tám", "chín"];
 
-/**
- * @param {number} number
- * @returns {string}
- */
 const _read2Digits = (number) => {
     if (number < 10) {
         return numbers[number];
@@ -42,11 +38,6 @@ const _read2Digits = (number) => {
     return numbers[ten] + " mươi " + ones[one];
 };
 
-/**
- * @param {number} number
- * @param {boolean} withZero
- * @returns {string}
- */
 const _read3Digits = (number, withZero = false) => {
     if (number < 100 && !withZero) {
         return _read2Digits(number);
@@ -64,6 +55,20 @@ const _read3Digits = (number, withZero = false) => {
     }
 
     return numbers[hundred] + " trăm " + _read2Digits(ten);
+};
+
+const _readTenThousand = (number) => {
+    const tenThousand = Math.trunc(number / 10);
+    const one = number % 10;
+
+    if (tenThousand === 0) {
+        return numbers[one];
+    }
+
+    if (one === 0) {
+        return _read2Digits(tenThousand) + " vạn";
+    }
+    return _read2Digits(tenThousand) + " vạn " + numbers[one];
 };
 
 /**
@@ -85,8 +90,11 @@ const _read9Digits = (number) => {
         if (hundred === 0) {
             numStr += units[i];
         } else {
-            numStr =
-                _read3Digits(hundred, thousand !== 0) + units[i] + " " + numStr;
+            const hundredStr =
+                i === 1
+                    ? _readTenThousand(hundred)
+                    : _read3Digits(hundred, thousand !== 0);
+            numStr = hundredStr + units[i] + " " + numStr;
         }
 
         number = thousand;
@@ -110,7 +118,7 @@ const readNumber = (number) => {
     let isOne = true;
     while (number > 0) {
         const million = number % 1e9;
-        numStr = _read9Digits(million) + ("" ? isOne : " tỷ ") + numStr;
+        numStr = _read9Digits(million) + (isOne ? "" : " tỷ ") + numStr;
         number = Math.trunc(number / 1e9);
     }
 
@@ -118,7 +126,8 @@ const readNumber = (number) => {
 };
 
 const arr = [
-    0, 1, 10, 11, 14, 15, 20, 31, 52, 65, 100, 101, 105, 214, 344, 1001, 1202,
-    2000, 3456, 10000, 23456, 123456,
+    0, 1, 10, 11, 14, 15, 20, 31, 52, 65, 74, 100, 101, 105, 214, 344, 1001,
+    1202, 2000, 3456, 10000, 23456, 123456, 700000, 845000, 890000, 999999,
+    1_000_000, 1_234_567, 100_000_000, 1_000_000_000,
 ];
 arr.forEach((value) => console.log(value, readNumber(value)));
