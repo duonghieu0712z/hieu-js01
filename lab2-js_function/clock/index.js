@@ -63,7 +63,7 @@ function drawTimeHand(ctx, radius) {
   drawHand(ctx, minuteAngle, radius * 0.8, 4, "#f5f5f5");
 
   const hourAngle = (hour * Math.PI) / 6 + minuteAngle / 12;
-  drawHand(ctx, hourAngle, radius * 0.5, 4, "#d5d5d5");
+  drawHand(ctx, hourAngle, radius * 0.5, 5, "#d5d5d5");
 }
 
 function drawHand(ctx, angle, length, width, color) {
