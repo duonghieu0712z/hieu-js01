@@ -126,7 +126,7 @@ const colors = ["red", "green", "blue", "yellow", "magenta", "cyan", "orange", "
 function initGame() {
   firstCard = null;
   lock = false;
-  coin = 1000;
+  coin = 10000;
   updateCoin(0);
   container.replaceChildren();
   shuffle([...colors, ...colors]).forEach((value) => {
