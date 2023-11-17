@@ -62,41 +62,45 @@ function createCard(color) {
       return;
     }
 
-    if (this.dataset.color === firstCard.dataset.color) {
-      this.dataset.revealed = true;
-      firstCard.dataset.revealed = true;
-
-      firstCard = null;
-      lock = false;
-      updateCoin(1000);
-
-      countedMatch += 2;
-      if (countedMatch === 20) {
-        setTimeout(
-          () =>
-            alert(
-              `You win, you get ${coin} coins! Click 'Restart' to start again!`
-            ),
-          11
-        );
-      }
-
-      return;
-    }
-
-    lock = true;
-    updateCoin(-500);
-
-    setTimeout(() => {
-      this.style.backgroundColor = backgroundCardColor;
-      firstCard.style.backgroundColor = backgroundCardColor;
-
-      firstCard = null;
-      lock = false;
-    }, 1000);
+    checkMatch(this);
   };
 
   return card;
+}
+
+function checkMatch(card) {
+  if (card.dataset.color === firstCard.dataset.color) {
+    matchCard(card);
+  } else {
+    unflip(card);
+  }
+}
+
+function matchCard(card) {
+  card.dataset.revealed = true;
+  firstCard.dataset.revealed = true;
+
+  firstCard = null;
+  lock = false;
+  updateCoin(1000);
+
+  countedMatch += 2;
+  if (countedMatch === 20) {
+    setTimeout(() => alert(`You win, you get ${coin} coins! Click 'Restart' to start again!`), 11);
+  }
+}
+
+function unflip(card) {
+  lock = true;
+  updateCoin(-500);
+
+  setTimeout(() => {
+    card.style.backgroundColor = backgroundCardColor;
+    firstCard.style.backgroundColor = backgroundCardColor;
+
+    firstCard = null;
+    lock = false;
+  }, 1000);
 }
 
 function updateCoin(bonus) {
@@ -117,18 +121,7 @@ function shuffle(arr) {
   return arr;
 }
 
-const colors = [
-  "red",
-  "green",
-  "blue",
-  "yellow",
-  "magenta",
-  "cyan",
-  "orange",
-  "brown",
-  "pink",
-  "purple",
-];
+const colors = ["red", "green", "blue", "yellow", "magenta", "cyan", "orange", "brown", "pink", "purple"];
 
 function initGame() {
   firstCard = null;
