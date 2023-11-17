@@ -52,16 +52,15 @@ function drawCenter(ctx) {
 function drawTimeHand(ctx, radius) {
   const now = new Date();
 
-  const hour = now.getHours() % 12;
-  const minute = now.getMinutes();
   const second = now.getSeconds();
-
   const secondAngle = (second * Math.PI) / 30;
   drawHand(ctx, secondAngle, radius * 0.9, 3, "#a776aa");
 
+  const minute = now.getMinutes();
   const minuteAngle = (minute * Math.PI) / 30 + secondAngle / 60;
   drawHand(ctx, minuteAngle, radius * 0.8, 4, "#f5f5f5");
 
+  const hour = now.getHours() % 12;
   const hourAngle = (hour * Math.PI) / 6 + minuteAngle / 12;
   drawHand(ctx, hourAngle, radius * 0.5, 5, "#d5d5d5");
 }
