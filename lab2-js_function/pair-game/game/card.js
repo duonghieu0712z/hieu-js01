@@ -11,26 +11,36 @@ export class Card extends Node {
     this._cover = new Sprite(cover);
     this.addChild(this._cover);
 
-    this.isActive = false;
+    this.isFlipped = false;
     this.value = value;
   }
 
-  get isActive() {
-    return this._isActive;
+  get isFlipped() {
+    return this._isFlipped;
   }
 
-  set isActive(value) {
-    this._isActive = value;
-    this._image.active = this._isActive;
-    this._cover.active = !this._isActive;
+  set isFlipped(value) {
+    this._isFlipped = value;
+    this._image.active = this._isFlipped;
+    this._cover.active = !this._isFlipped;
   }
 
-  flip(duration) {
+  translate(x, y, duration, delay) {
     gsap.to(this, {
+      x,
+      y,
+      duration,
+      delay,
+    });
+  }
+
+  flip(duration, delay = 0) {
+    return gsap.to(this, {
       scaleX: 0,
       duration,
+      delay,
       onComplete: () => {
-        this.isActive = !this.isActive;
+        this.isFlipped = !this.isFlipped;
         gsap.to(this, { scaleX: 1, duration });
       },
     });

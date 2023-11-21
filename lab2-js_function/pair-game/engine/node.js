@@ -1,6 +1,6 @@
 export class Node {
-  constructor() {
-    this.element = this._createElement();
+  constructor(tagName = "div") {
+    this.element = this._createElement(tagName);
 
     this.scaleX = 1;
     this.scaleY = 1;
