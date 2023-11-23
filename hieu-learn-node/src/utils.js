@@ -4,7 +4,7 @@ import sharp from "sharp";
 
 export function readJsonFile(filePath) {
   const buffer = fs.readFileSync(filePath);
-  return JSON.parse(buffer, null, 2);
+  return JSON.parse(buffer);
 }
 
 export function writeJsonFile(filePath, json) {
@@ -15,14 +15,18 @@ function isFile(path) {
   return fs.statSync(path).isFile();
 }
 
-function isImage(filePath, type = null) {
+function isFileType(filePath, fileType) {
   const extname = path.extname(filePath).substring(1);
+  return extname === fileType;
+}
 
-  if (type) {
-    return extname === type;
+function isImage(filePath, fileType = null) {
+  const imageExtensions = ["jpg", "jpeg", "png", "gif"];
+  if (fileType && imageExtensions.includes(fileType)) {
+    return isFileType(filePath, fileType);
   }
 
-  const imageExtensions = ["jpg", "jpeg", "png", "gif"];
+  const extname = path.extname(filePath).substring(1);
   return imageExtensions.includes(extname);
 }
 
@@ -69,4 +73,27 @@ export async function resizeImages(dirPath, percent) {
     const filePath = `${dirPath}/${value}`;
     resizeImage(filePath, percent);
   });
+}
+
+function isScript(filePath) {
+  return isFileType(filePath, "js") || isFileType(filePath, "ts");
+}
+
+function findScripts(dirPath) {
+  const files = fs.readdirSync(dirPath, { recursive: true });
+  return files.filter((value) => {
+    const filePath = `${dirPath}/${value}`;
+    return isFile(filePath) && isScript(filePath);
+  });
+}
+
+export function importSrcToIndex() {
+  const scripts = findScripts("./src").filter((value) => value !== "index.js");
+  const strBuilder = scripts.map((value) => {
+    if (isFileType(value, "ts")) {
+      value = value.replace(/\.[^/.]+$/, "");
+    }
+    return `import "./${value}";`;
+  });
+  fs.writeFileSync("./src/index.js", strBuilder.join("\n"));
 }
